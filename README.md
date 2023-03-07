@@ -4,14 +4,14 @@ TOEIC test generator using ChatGPT
 ## Dependencies
 
 ```bash
-pip install python-dotenv openai pyttsx3
+pip install -r requirements.txt
 ```
 
 ## Usage
 
-1. Create `.env` file and set `API_KEY` and `WPM`.
+1. Rename `.env.example` to `.env` and set your OpenAI API key to `API_KEY`.
 
-2. Run `main.py`.
+2. Run `python3 main.py`.
 
 ## License
 
