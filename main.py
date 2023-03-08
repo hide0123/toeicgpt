@@ -19,9 +19,9 @@ openai.api_key = os.getenv("API_KEY")
 
 print("Generating a script...")
 
-message = "I am a woman.\nI am a man."
+message = "I am a man.\nI am a woman."
 
-# ChatGPT
+# Generate a script
 if CHATGPT:
   response = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
@@ -37,18 +37,39 @@ if CHATGPT:
 
 # print(message)
 
+# Save a script
+with open("script.txt", mode="w") as f:
+  f.write(message)
+
 # pyttsx3
 engine = pyttsx3.init()
 
-# Voice
+# Voices
 voices = engine.getProperty("voices")
-voice =[voices[FEMALE_VOICE].id, voices[MALE_VOICE].id]
+voice =[voices[MALE_VOICE].id, voices[FEMALE_VOICE].id]
 
 # WPM
 engine.setProperty("rate", WPM)
 
 mp3 = []
 lines = message.split("\n")
+
+# Judge the speaker
+if True:
+  response = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      temperature=0,
+      messages=[
+          {"role": "system", "content": "Answer yes or no"},
+          {"role": "user", "content": '"' + lines[0] + '" Is the speaker a woman?'},
+      ]
+  )
+  
+  # Set a response
+  message = response["choices"][0]["message"]["content"]
+  
+  if "Yes" in message:
+    voice[0], voice[1] = voice[1], voice[0]
 
 with tempfile.TemporaryDirectory() as tmpdir:
   for i, line in enumerate(lines):
@@ -68,7 +89,3 @@ with tempfile.TemporaryDirectory() as tmpdir:
           .output("voice.mp3")
           .run(quiet=True, overwrite_output=True)
   )
-
-# Save a script
-with open("script.txt", mode="w") as f:
-  f.write(message)
