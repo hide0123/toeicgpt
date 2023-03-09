@@ -1,6 +1,8 @@
 # toeicgpt
 TOEIC test generator using ChatGPT
 
+[NOTE] This tool is only tested on Windows.
+
 ## Dependencies
 
 ```bash
