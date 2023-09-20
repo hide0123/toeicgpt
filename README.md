@@ -1,7 +1,9 @@
-# toeicgpt
+# TOEICGPT
 TOEIC test generator using ChatGPT
 
-[NOTE] This tool is only tested on Windows.
+[Note] This tool is only tested on Windows.
+
+[Demo] https://youtu.be/KD5pRBH3ktg
 
 ## Dependencies
 
